@@ -1,0 +1,13 @@
+pandas
+string
+nltk
+json
+matplotlib
+plotly
+thefuzz
+seaborn
+numpy
+streamlit
+os
+re
+Python 3.9.13
