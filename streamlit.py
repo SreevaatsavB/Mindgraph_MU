@@ -20,15 +20,11 @@ metadata_df = pd.read_csv('/Users/sreevaatsav/Desktop/mu_h1/Metadata.csv')
 
 
 img1_path = '/Users/sreevaatsav/Desktop/mu_h1/f1_events.png'
-
 img2_path = '/Users/sreevaatsav/Desktop/mu_h1/f2_events.png'
-
-
+img3_path = '/Users/sreevaatsav/Desktop/mu_h1/num_evs.png'
 
 
 batch_17, batch_18 = 0,0
-
-
 for i in range(len(clubs_pro_df)):
     temp_arr = str(clubs_pro_df["RollNumber"][i]).split("X")
     if temp_arr[0] == "17":
@@ -75,6 +71,8 @@ inv_ccountdf.columns = ["num_cevents", "count"]
 # Page setting
 st.set_page_config(layout="wide")
 
+st.title('Deduped data analysis')
+
 st.header('Clubs and Fest data analysis')
 
 # with open('style.css') as f:
@@ -86,12 +84,28 @@ st.header('Clubs and Fest data analysis')
 # a1.metric("Wind", "9 mph", "-8%")
 # a2.metric("Humidity", "86%", "4%")
 
-# # Row B
-# b1, b2, b3, b4 = st.columns(4)
-# b1.metric("Temperature", "70 °F", "1.2 °F")
-# b2.metric("Wind", "9 mph", "-8%")
-# b3.metric("Humidity", "86%", "4%")
-# b4.metric("Humidity", "86%", "4%")
+# Row 
+b1, b2, b3 = st.columns(3)
+
+b1.metric(
+    label = "Number of students", value = len(metadata_df))
+    
+b2.metric(
+    label = "Number of clubs", value = len(clubs_pro_df["Club_Name"].unique()))
+    
+b3.metric(
+    label = "Number of fests", value = len(part_pro_df["Fest_Name"].unique()))
+    
+
+# b1, b2 = st.columns(2)
+
+# b1.metric(
+#     label = "Number of students", value = len(metadata_df["RollNumber"]))
+    
+# b2.metric(
+#     label = "Number of clubs", value = len(clubs_pro_df["Club_Name"].unique()))
+
+
 
 # # Row C
 c1, c2 = st.columns((5,5))
@@ -112,7 +126,21 @@ with c2:
     
     st.plotly_chart(fig)
     
+
+c1, c2 = st.columns((5,5))
+with c1: 
+    st.markdown('### No.of events in fests')
+    image3 = Image.open(img3_path)
+    image3 = np.array(image3)
+    st.image(image3)
     
+with c2:
+    st.markdown('### No.of organizers in fests')
+    fig = px.pie(org_pro_df, 'Fest_Name')
+    
+    st.plotly_chart(fig)
+        
+
 
 c1, c2 = st.columns((4,4))
 
@@ -141,7 +169,7 @@ c1, c2 = st.columns((4,4))
 
 with c1:
     
-    st.markdown('### Batches of students participated in club events')
+    st.markdown('### Distribution based on batch in club events')
     
     fig = plt.figure(figsize=(4,4))
     
@@ -156,7 +184,7 @@ with c2:
     
     fig = plt.figure(figsize=(8,8))
     sns.barplot(y = inv_ccountdf["count"], x = inv_ccountdf["num_cevents"])
-    plt.xlabel("No.of events attended by a student (club data)")
+    plt.xlabel("No.of events attended by a student (club event)")
     
     st.plotly_chart(fig)
     
@@ -174,7 +202,7 @@ with c1:
 
 with c2:
     
-    image2 = Image.open(img1_path)
+    image2 = Image.open(img2_path)
     image2 = np.array(image2)
     st.image(image2, caption='Events in fest2')
     
