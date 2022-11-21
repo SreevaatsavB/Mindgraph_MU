@@ -111,7 +111,7 @@ b3.metric(
 c1, c2 = st.columns((5,5))
 
 with c1: 
-    st.markdown('### Clubs')
+    st.markdown('### No.of participants in each club')
     
     fig = px.pie(clubs_pro_df, 'Club_Name')
     
@@ -120,7 +120,7 @@ with c1:
     
 with c2:
     
-    st.markdown('### Fests')
+    st.markdown('### No.of participants in each fest')
     
     fig = px.pie(part_pro_df, 'Fest_Name')
     
@@ -160,12 +160,20 @@ with c2:
     
     st.plotly_chart(fig)
     
-    # st.write('''
-    # Streamlit: A web application framework for Python.
-# ''')
+    
+st.markdown("Here, the event 3 conducted by each club has lesser no.of participants than the other events of the respective clubs. So, analyazing  event 3 of each club could improve the strength and intrest towards that event, or any other alternative could be preferred")
+
+b1, b2, = st.columns(2)
+
+b1.metric(
+    label = "Number of batch 18 students", value = len(metadata_df[metadata_df["ID"].str.startswith("18")]))
+    
+b2.metric(
+    label = "Number of batch 17 students", value = len(metadata_df[metadata_df["ID"].str.startswith("17")]))
+    
+
 
 c1, c2 = st.columns((4,4))
-
 
 with c1:
     
@@ -188,6 +196,9 @@ with c2:
     
     st.plotly_chart(fig)
     
+st.markdown("We can see that almost half of the students aren't participating in any of the events")
+st.markdown("Also, most of the students who are participating in the events, participate  mostly in 3 events and then the count decreases.")
+    
     
 st.header('Students participation in fest events')
 
@@ -205,4 +216,7 @@ with c2:
     image2 = Image.open(img2_path)
     image2 = np.array(image2)
     st.image(image2, caption='Events in fest2')
+    
+st.markdown("Seems like the first 5 events conducted in both the fests have higher strength than the rest of the events, so maybe we could prefer those event organisers or activities of the 5 events of the respective fests")
+
     
