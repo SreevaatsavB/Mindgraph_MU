@@ -1,4 +1,4 @@
-# Data Deduplication Mindgrapg Hackathon
+# Data Deduplication Mindgraph Hackathon
 
 ## Description and steps on how the files work: 
 
