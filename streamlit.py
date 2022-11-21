@@ -10,6 +10,7 @@ import seaborn as sns
 import plotly.express as px
 
 
+# Change paths in your local machines
 
 org_pro_df = pd.read_csv('/Users/sreevaatsav/Desktop/mu_h1/org_pro_df.csv')
 clubs_pro_df = pd.read_csv('/Users/sreevaatsav/Desktop/mu_h1/clubs_pro_df.csv')
@@ -18,7 +19,9 @@ part_pro_df = pd.read_csv('/Users/sreevaatsav/Desktop/mu_h1/part_pro_df.csv')
 metadata_df = pd.read_csv('/Users/sreevaatsav/Desktop/mu_h1/Metadata.csv')
 
 
+img1_path = '/Users/sreevaatsav/Desktop/mu_h1/f1_events.png'
 
+img2_path = '/Users/sreevaatsav/Desktop/mu_h1/f2_events.png'
 
 
 
@@ -149,11 +152,29 @@ with c1:
     
 with c2:
     
-    st.markdown('### Clubs and events')
+    st.markdown('### Students participation in club events')
     
     fig = plt.figure(figsize=(8,8))
     sns.barplot(y = inv_ccountdf["count"], x = inv_ccountdf["num_cevents"])
     plt.xlabel("No.of events attended by a student (club data)")
     
     st.plotly_chart(fig)
+    
+    
+st.header('Students participation in fest events')
+
+c1, c2 = st.columns((5,5))
+with c1:
+        
+    image1 = Image.open(img1_path)
+    image1 = np.array(image1)
+    st.image(image1, caption='Events in fest1')
+    
+    
+
+with c2:
+    
+    image2 = Image.open(img1_path)
+    image2 = np.array(image2)
+    st.image(image2, caption='Events in fest2')
     
